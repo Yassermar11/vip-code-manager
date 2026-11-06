@@ -13,83 +13,17 @@ const INITIAL_SETTINGS: AppSettings = {
   supabaseAnonKey: '',
 };
 
-const INITIAL_BATCH: ImportBatch = {
-  id: 'batch-sample-1',
-  batch_name: 'Initial VIP Batch A',
-  imported_at: new Date(Date.now() - 86400000 * 2).toISOString(),
-  total_codes: 5,
-  imported_by: 'Cinema Management',
-};
-
-const INITIAL_CODES: CodeRecord[] = [
-  {
-    id: 'code-1',
-    original_code: 'MA00501251378756',
-    code_type: 'qr',
-    validation_status: 'validated',
-    usage_status: 'unused',
-    created_at: new Date(Date.now() - 86400000 * 2).toISOString(),
-    validated_at: new Date(Date.now() - 86400000 * 1.5).toISOString(),
-    used_at: null,
-    batch_id: 'batch-sample-1',
-  },
-  {
-    id: 'code-2',
-    original_code: 'MA00501251378757',
-    code_type: 'qr',
-    validation_status: 'validated',
-    usage_status: 'used',
-    created_at: new Date(Date.now() - 86400000 * 2).toISOString(),
-    validated_at: new Date(Date.now() - 86400000 * 1.5).toISOString(),
-    used_at: new Date(Date.now() - 86400000 * 1).toISOString(),
-    batch_id: 'batch-sample-1',
-  },
-  {
-    id: 'code-3',
-    original_code: 'MA00501251378758',
-    code_type: 'barcode',
-    validation_status: 'pending',
-    usage_status: 'unused',
-    created_at: new Date(Date.now() - 86400000 * 2).toISOString(),
-    validated_at: null,
-    used_at: null,
-    batch_id: 'batch-sample-1',
-  },
-  {
-    id: 'code-4',
-    original_code: 'MA00501251378759',
-    code_type: 'barcode',
-    validation_status: 'pending',
-    usage_status: 'unused',
-    created_at: new Date(Date.now() - 86400000 * 2).toISOString(),
-    validated_at: null,
-    used_at: null,
-    batch_id: 'batch-sample-1',
-  },
-  {
-    id: 'code-5',
-    original_code: 'MA00501251378760',
-    code_type: 'qr',
-    validation_status: 'validated',
-    usage_status: 'unused',
-    created_at: new Date(Date.now() - 86400000 * 2).toISOString(),
-    validated_at: new Date(Date.now() - 86400000 * 1.5).toISOString(),
-    used_at: null,
-    batch_id: 'batch-sample-1',
-  },
-];
-
 export function getCodes(): CodeRecord[] {
   try {
     const data = localStorage.getItem(CODES_KEY);
     if (!data) {
-      localStorage.setItem(CODES_KEY, JSON.stringify(INITIAL_CODES));
-      return INITIAL_CODES;
+      localStorage.setItem(CODES_KEY, JSON.stringify([]));
+      return [];
     }
     return JSON.parse(data);
   } catch (e) {
     console.error('Error reading codes from storage:', e);
-    return INITIAL_CODES;
+    return [];
   }
 }
 
@@ -105,13 +39,13 @@ export function getBatches(): ImportBatch[] {
   try {
     const data = localStorage.getItem(BATCHES_KEY);
     if (!data) {
-      localStorage.setItem(BATCHES_KEY, JSON.stringify([INITIAL_BATCH]));
-      return [INITIAL_BATCH];
+      localStorage.setItem(BATCHES_KEY, JSON.stringify([]));
+      return [];
     }
     return JSON.parse(data);
   } catch (e) {
     console.error('Error reading batches:', e);
-    return [INITIAL_BATCH];
+    return [];
   }
 }
 
