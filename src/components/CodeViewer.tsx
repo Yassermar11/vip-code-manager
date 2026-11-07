@@ -31,12 +31,18 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ codes, language, onClear
     setCurrentIndex((prev) => (prev < codes.length - 1 ? prev + 1 : 0));
   };
 
+  const handleClearClick = () => {
+    if (window.confirm(t(language, 'confirmClearAll'))) {
+      onClearCodes();
+    }
+  };
+
   return (
     <div className="max-w-md mx-auto space-y-6 p-4">
       {/* Clear All button positioned above total codes on the right */}
       <div className="flex justify-end">
         <button
-          onClick={onClearCodes}
+          onClick={handleClearClick}
           className="bg-red-600 hover:bg-red-700 text-white text-xs font-semibold py-1.5 px-3 rounded flex items-center space-x-1.5 transition shadow-sm"
         >
           <Trash2 className="w-3.5 h-3.5" />

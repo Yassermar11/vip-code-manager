@@ -22,6 +22,7 @@ const dict = {
     exportPdf: 'Export All QR Codes to PDF',
     totalCodes: 'Total Codes',
     clearAll: 'Clear All',
+    confirmClearAll: 'Are you sure you want to clear all codes?',
   },
   fr: {
     importTab: 'Importer & Générer',
@@ -44,6 +45,7 @@ const dict = {
     exportPdf: 'Exporter tous les QR en PDF',
     totalCodes: 'Total des codes',
     clearAll: 'Tout effacer',
+    confirmClearAll: 'Êtes-vous sûr de vouloir effacer tous les codes ?',
   },
   ar: {
     importTab: 'استيراد وتوليد',
@@ -66,6 +68,7 @@ const dict = {
     exportPdf: 'تصدير جميع رموز QR إلى ملف PDF',
     totalCodes: 'إجمالي الرموز',
     clearAll: 'مسح الكل',
+    confirmClearAll: 'هل أنت متأكد من رغبتك في مسح جميع الرموز؟',
   },
 };
 
