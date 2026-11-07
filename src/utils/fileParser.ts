@@ -2,8 +2,8 @@ import * as XLSX from 'xlsx';
 import mammoth from 'mammoth';
 import * as pdfjsLib from 'pdfjs-dist';
 
-// Configure PDF.js worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+// Configure PDF.js worker using unpkg with exact matching version
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.js`;
 
 export async function parseFileToCodes(file: File): Promise<string[]> {
   const fileName = file.name.toLowerCase();
@@ -57,8 +57,11 @@ export async function parseFileToCodes(file: File): Promise<string[]> {
       const textContent = await page.getTextContent();
       textContent.items.forEach((item: any) => {
         if (item.str) {
-          const val = item.str.trim();
-          if (val) codes.push(val);
+          const parts = item.str.split(/\s+/);
+          parts.forEach((p: string) => {
+            const cleaned = p.trim();
+            if (cleaned) codes.push(cleaned);
+          });
         }
       });
     }
