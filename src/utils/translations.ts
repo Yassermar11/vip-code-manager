@@ -23,6 +23,8 @@ const dict = {
     totalCodes: 'Total Codes',
     clearAll: 'Clear All',
     confirmClearAll: 'Are you sure you want to clear all codes?',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
   },
   fr: {
     importTab: 'Importer & Générer',
@@ -46,6 +48,8 @@ const dict = {
     totalCodes: 'Total des codes',
     clearAll: 'Tout effacer',
     confirmClearAll: 'Êtes-vous sûr de vouloir effacer tous les codes ?',
+    cancel: 'Annuler',
+    confirm: 'Confirmer',
   },
   ar: {
     importTab: 'استيراد وتوليد',
@@ -69,6 +73,8 @@ const dict = {
     totalCodes: 'إجمالي الرموز',
     clearAll: 'مسح الكل',
     confirmClearAll: 'هل أنت متأكد من رغبتك في مسح جميع الرموز؟',
+    cancel: 'إلغاء',
+    confirm: 'تأكيد',
   },
 };
 
