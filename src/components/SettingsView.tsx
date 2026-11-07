@@ -18,14 +18,19 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
 }) => {
   const [isExporting, setIsExporting] = useState(false);
   const [exportProgress, setExportProgress] = useState(0);
+  const [showLangDropdown, setShowLangDropdown] = useState(false);
+
+  const languages: { code: Language; label: string }[] = [
+    { code: 'en', label: 'English' },
+    { code: 'fr', label: 'Français' },
+    { code: 'ar', label: 'العربية' },
+  ];
+
+  const currentLangLabel = languages.find((l) => l.code === settings.language)?.label || 'English';
 
   const handleThemeToggle = () => {
     const nextTheme: ThemeMode = settings.theme === 'dark' ? 'light' : 'dark';
     onUpdateSettings({ ...settings, theme: nextTheme });
-  };
-
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onUpdateSettings({ ...settings, language: e.target.value as Language });
   };
 
   const handleExportPdf = async () => {
@@ -124,20 +129,41 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         </div>
 
         {/* Language */}
-        <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-800">
+        <div className="relative flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-800">
           <div className="flex items-center space-x-2">
             <Globe className="w-5 h-5" />
             <span className="font-medium">{t(settings.language, 'language')}</span>
           </div>
-          <select
-            value={settings.language}
-            onChange={handleLanguageChange}
-            className="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded py-1.5 px-3 text-sm font-medium focus:outline-none"
-          >
-            <option value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="ar">العربية</option>
-          </select>
+          <div className="relative">
+            <button
+              onClick={() => setShowLangDropdown(!showLangDropdown)}
+              className="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 rounded py-1.5 px-3 text-sm font-medium flex items-center space-x-2 transition focus:outline-none"
+            >
+              <span>{currentLangLabel}</span>
+              <span className="text-xs opacity-75">▼</span>
+            </button>
+
+            {showLangDropdown && (
+              <div className="absolute right-0 mt-1 w-36 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded shadow-lg z-30 py-1">
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => {
+                      onUpdateSettings({ ...settings, language: lang.code });
+                      setShowLangDropdown(false);
+                    }}
+                    className={`w-full text-left px-3 py-2 text-sm transition hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                      settings.language === lang.code
+                        ? 'font-bold text-blue-600 dark:text-blue-400'
+                        : 'text-gray-800 dark:text-gray-200'
+                    }`}
+                  >
+                    {lang.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* PDF Export */}
