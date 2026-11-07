@@ -49,7 +49,8 @@ export async function parseFileToCodes(file: File): Promise<string[]> {
     });
   } else if (fileName.endsWith('.pdf')) {
     const arrayBuffer = await file.arrayBuffer();
-    const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+    const uint8Array = new Uint8Array(arrayBuffer);
+    const loadingTask = pdfjsLib.getDocument({ data: uint8Array });
     const pdfDoc = await loadingTask.promise;
 
     for (let i = 1; i <= pdfDoc.numPages; i++) {
