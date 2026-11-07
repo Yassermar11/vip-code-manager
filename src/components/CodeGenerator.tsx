@@ -30,9 +30,9 @@ export const CodeGenerator: React.FC<CodeGeneratorProps> = ({ value, size = 220 
   }, [value, size]);
 
   return (
-    <div className="flex flex-col items-center justify-center p-4 bg-white border border-gray-300 rounded shadow-sm">
+    <div className="flex flex-col items-center justify-center p-4 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded shadow-sm">
       <div className="mb-3 text-center">
-        <span className="font-mono font-bold text-lg text-gray-900 tracking-wider select-all">
+        <span className="font-mono font-bold text-lg text-gray-900 dark:text-gray-100 tracking-wider select-all">
           {value}
         </span>
       </div>

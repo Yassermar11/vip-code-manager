@@ -42,6 +42,12 @@ export function App() {
     } catch (e) {
       console.error('Error saving settings:', e);
     }
+
+    if (settings.theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }, [settings]);
 
   const handleCodesGenerated = (newCodes: CodeItem[]) => {
