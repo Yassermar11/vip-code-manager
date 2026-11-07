@@ -21,6 +21,7 @@ const dict = {
     language: 'Language',
     exportPdf: 'Export All QR Codes to PDF',
     totalCodes: 'Total Codes',
+    clearAll: 'Clear All',
   },
   fr: {
     importTab: 'Importer & Générer',
@@ -42,6 +43,7 @@ const dict = {
     language: 'Langue',
     exportPdf: 'Exporter tous les QR en PDF',
     totalCodes: 'Total des codes',
+    clearAll: 'Tout effacer',
   },
   ar: {
     importTab: 'استيراد وتوليد',
@@ -63,6 +65,7 @@ const dict = {
     language: 'اللغة',
     exportPdf: 'تصدير جميع رموز QR إلى ملف PDF',
     totalCodes: 'إجمالي الرموز',
+    clearAll: 'مسح الكل',
   },
 };
 

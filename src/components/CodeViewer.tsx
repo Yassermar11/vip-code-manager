@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { CodeItem, Language } from '../types';
 import { t } from '../utils/translations';
 import { CodeGenerator } from './CodeGenerator';
-import { ChevronLeft, ChevronRight, Trash2, Download } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Trash2 } from 'lucide-react';
 
 interface CodeViewerProps {
   codes: CodeItem[];
   language: Language;
-  onDeleteCode: (id: string) => void;
+  onClearCodes: () => void;
 }
 
-export const CodeViewer: React.FC<CodeViewerProps> = ({ codes, language, onDeleteCode }) => {
+export const CodeViewer: React.FC<CodeViewerProps> = ({ codes, language, onClearCodes }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   if (codes.length === 0) {
@@ -31,18 +31,19 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ codes, language, onDelet
     setCurrentIndex((prev) => (prev < codes.length - 1 ? prev + 1 : 0));
   };
 
-  const handleDownloadCurrent = () => {
-    const canvas = document.querySelector('canvas');
-    if (!canvas) return;
-    const url = canvas.toDataURL('image/png');
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `qrcode_${currentCode.original_code}.png`;
-    a.click();
-  };
-
   return (
     <div className="max-w-md mx-auto space-y-6 p-4">
+      {/* Clear All button positioned above total codes on the right */}
+      <div className="flex justify-end">
+        <button
+          onClick={onClearCodes}
+          className="bg-red-600 hover:bg-red-700 text-white text-xs font-semibold py-1.5 px-3 rounded flex items-center space-x-1.5 transition shadow-sm"
+        >
+          <Trash2 className="w-3.5 h-3.5" />
+          <span>{t(language, 'clearAll')}</span>
+        </button>
+      </div>
+
       <div className="flex items-center justify-between bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 px-4 py-2 rounded shadow-sm">
         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
           {t(language, 'totalCodes')}: {codes.length}
@@ -72,30 +73,6 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ codes, language, onDelet
         >
           <span>{t(language, 'next')}</span>
           <ChevronRight className="w-5 h-5" />
-        </button>
-      </div>
-
-      {/* Actions */}
-      <div className="flex items-center justify-between pt-4 border-t border-gray-300 dark:border-gray-700">
-        <button
-          onClick={handleDownloadCurrent}
-          className="bg-green-600 hover:bg-green-700 text-white text-sm font-semibold py-2 px-3 rounded flex items-center space-x-1.5 transition"
-        >
-          <Download className="w-4 h-4" />
-          <span>{t(language, 'downloadQr')}</span>
-        </button>
-
-        <button
-          onClick={() => {
-            onDeleteCode(currentCode.id);
-            if (currentIndex >= codes.length - 1 && currentIndex > 0) {
-              setCurrentIndex(currentIndex - 1);
-            }
-          }}
-          className="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2 px-3 rounded flex items-center space-x-1.5 transition"
-        >
-          <Trash2 className="w-4 h-4" />
-          <span>{t(language, 'deleteCode')}</span>
         </button>
       </div>
     </div>

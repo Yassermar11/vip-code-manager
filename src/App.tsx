@@ -54,8 +54,8 @@ export function App() {
     setCodes(newCodes);
   };
 
-  const handleDeleteCode = (id: string) => {
-    setCodes((prev) => prev.filter((c) => c.id !== id));
+  const handleClearCodes = () => {
+    setCodes([]);
   };
 
   const handleUpdateSettings = (newSettings: AppSettings) => {
@@ -85,7 +85,7 @@ export function App() {
             <CodeViewer
               codes={codes}
               language={settings.language}
-              onDeleteCode={handleDeleteCode}
+              onClearCodes={handleClearCodes}
             />
           )}
 
