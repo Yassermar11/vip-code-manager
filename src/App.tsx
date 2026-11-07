@@ -22,7 +22,10 @@ export function App() {
       if (savedCodes) setCodes(JSON.parse(savedCodes));
 
       const savedSettings = localStorage.getItem(SETTINGS_STORAGE_KEY);
-      if (savedSettings) setSettings(JSON.parse(savedSettings));
+      if (savedSettings) {
+        const parsed = JSON.parse(savedSettings);
+        setSettings((prev) => ({ ...prev, ...parsed }));
+      }
     } catch (e) {
       console.error('Error loading from storage:', e);
     }
@@ -47,6 +50,12 @@ export function App() {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
+    }
+
+    if (settings.language === 'ar') {
+      document.documentElement.setAttribute('dir', 'rtl');
+    } else {
+      document.documentElement.setAttribute('dir', 'ltr');
     }
   }, [settings]);
 
