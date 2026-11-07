@@ -1,0 +1,65 @@
+import React from 'react';
+import { ActiveTab, Language } from '../types';
+import { t } from '../utils/translations';
+import { PlusCircle, QrCode, Settings } from 'lucide-react';
+
+interface NavigationProps {
+  activeTab: ActiveTab;
+  setActiveTab: (tab: ActiveTab) => void;
+  language: Language;
+  codesCount: number;
+}
+
+export const Navigation: React.FC<NavigationProps> = ({
+  activeTab,
+  setActiveTab,
+  language,
+  codesCount,
+}) => {
+  return (
+    <nav className="border-b border-gray-300 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-20">
+      <div className="max-w-2xl mx-auto flex items-center justify-around p-3">
+        <button
+          onClick={() => setActiveTab('import')}
+          className={`flex items-center space-x-1.5 py-2 px-3 rounded font-medium text-sm transition ${
+            activeTab === 'import'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+          }`}
+        >
+          <PlusCircle className="w-4 h-4" />
+          <span>{t(language, 'importTab')}</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('viewer')}
+          className={`flex items-center space-x-1.5 py-2 px-3 rounded font-medium text-sm transition relative ${
+            activeTab === 'viewer'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+          }`}
+        >
+          <QrCode className="w-4 h-4" />
+          <span>{t(language, 'viewerTab')}</span>
+          {codesCount > 0 && (
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 rounded-full">
+              {codesCount}
+            </span>
+          )}
+        </button>
+
+        <button
+          onClick={() => setActiveTab('settings')}
+          className={`flex items-center space-x-1.5 py-2 px-3 rounded font-medium text-sm transition ${
+            activeTab === 'settings'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+          }`}
+        >
+          <Settings className="w-4 h-4" />
+          <span>{t(language, 'settingsTab')}</span>
+        </button>
+      </div>
+    </nav>
+  );
+};
