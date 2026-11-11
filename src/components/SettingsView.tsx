@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AppSettings, CodeItem, Language, ThemeMode } from '../types';
 import { t } from '../utils/translations';
-import { FileDown, Sun, Moon, Globe, Award } from 'lucide-react';
+import { FileDown, Sun, Moon, Globe } from 'lucide-react';
 import jsPDF from 'jspdf';
 import QRCode from 'qrcode';
 
@@ -102,15 +102,16 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
 
       setExportProgress(90);
 
-      // Add footer signature and version v1.0.0 to all pages of the PDF
+      // Add signature and version v1.0.0 right under the last QR code generation area on each page
       const totalPages = doc.getNumberOfPages();
       for (let p = 1; p <= totalPages; p++) {
         doc.setPage(p);
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8);
-        doc.setTextColor(130, 130, 130);
+        doc.setTextColor(100, 100, 100);
         const footerText = `Created by ${settings.signature || 'Yasser Marzouhi (yasser.marzouhi@outlook.com)'} | v1.0.0`;
-        doc.text(footerText, pageWidth / 2, pageHeight - 8, { align: 'center' });
+        const contentBottomY = margin + 10 + rows * cellHeight + 6;
+        doc.text(footerText, pageWidth / 2, contentBottomY, { align: 'center' });
       }
 
       setExportProgress(95);
@@ -181,28 +182,6 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               </div>
             )}
           </div>
-        </div>
-
-        {/* Developer Signature */}
-        <div className="pt-4 border-t border-gray-100 dark:border-gray-800 space-y-2">
-          <div className="flex items-center space-x-3 text-gray-700 dark:text-gray-300">
-            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
-              <Award className="w-5 h-5 text-amber-500" />
-            </div>
-            <span className="font-medium">{t(settings.language, 'signature')}</span>
-          </div>
-          <input
-            type="text"
-            value={settings.signature || ''}
-            onChange={(e) => onUpdateSettings({ ...settings, signature: e.target.value })}
-            placeholder={t(settings.language, 'signaturePlaceholder')}
-            className="w-full p-3 border border-gray-200 dark:border-gray-700/80 rounded-xl text-sm bg-gray-50/50 dark:bg-gray-800/50 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
-          />
-          {settings.signature && (
-            <p className="text-xs text-gray-500 dark:text-gray-400 italic text-center pt-1">
-              Signed by {settings.signature}
-            </p>
-          )}
         </div>
 
         {/* PDF Export */}
