@@ -30,13 +30,15 @@ export const CodeGenerator: React.FC<CodeGeneratorProps> = ({ value, size = 220 
   }, [value, size]);
 
   return (
-    <div className="flex flex-col items-center justify-center p-4 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded shadow-sm">
-      <div className="mb-3 text-center">
-        <span className="font-mono font-bold text-lg text-gray-900 dark:text-gray-100 tracking-wider select-all">
+    <div className="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm transition-all">
+      <div className="mb-4 text-center">
+        <span className="font-mono font-bold text-lg text-gray-900 dark:text-gray-100 tracking-wider select-all bg-gray-100 dark:bg-gray-800/60 py-1.5 px-3 rounded-lg">
           {value}
         </span>
       </div>
-      <canvas ref={canvasRef} className="max-w-full h-auto" />
+      <div className="p-3 bg-white rounded-xl shadow-inner border border-gray-100 dark:border-gray-800">
+        <canvas ref={canvasRef} className="max-w-full h-auto block" />
+      </div>
     </div>
   );
 };
