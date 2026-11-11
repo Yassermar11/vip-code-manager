@@ -9,6 +9,7 @@ export type Language = 'en' | 'fr' | 'ar';
 export interface AppSettings {
   theme: ThemeMode;
   language: Language;
+  signature?: string;
 }
 
 export type ActiveTab = 'import' | 'viewer' | 'settings';

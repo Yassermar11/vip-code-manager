@@ -25,6 +25,8 @@ const dict = {
     confirmClearAll: 'Are you sure you want to clear all codes?',
     cancel: 'Cancel',
     confirm: 'Confirm',
+    signature: 'Developer Signature',
+    signaturePlaceholder: 'Enter your signature or name...',
   },
   fr: {
     importTab: 'Importer & Générer',
@@ -50,6 +52,8 @@ const dict = {
     confirmClearAll: 'Êtes-vous sûr de vouloir effacer tous les codes ?',
     cancel: 'Annuler',
     confirm: 'Confirmer',
+    signature: 'Signature du développeur',
+    signaturePlaceholder: 'Entrez votre signature ou nom...',
   },
   ar: {
     importTab: 'استيراد و إنشاء',
@@ -75,6 +79,8 @@ const dict = {
     confirmClearAll: 'هل أنت متأكد من رغبتك في مسح جميع الرموز؟',
     cancel: 'إلغاء',
     confirm: 'تأكيد',
+    signature: 'توقيع المطور',
+    signaturePlaceholder: 'أدخل توقيعك أو اسمك...',
   },
 };
 
