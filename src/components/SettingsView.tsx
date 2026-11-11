@@ -100,6 +100,19 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         }
       }
 
+      setExportProgress(90);
+
+      // Add footer signature and version v1.0.0 to all pages of the PDF
+      const totalPages = doc.getNumberOfPages();
+      for (let p = 1; p <= totalPages; p++) {
+        doc.setPage(p);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(130, 130, 130);
+        const footerText = `Created by ${settings.signature || 'Yasser Marzouhi (yasser.marzouhi@outlook.com)'} | v1.0.0`;
+        doc.text(footerText, pageWidth / 2, pageHeight - 8, { align: 'center' });
+      }
+
       setExportProgress(95);
       doc.save(`vip_qrs_${Date.now()}.pdf`);
       setExportProgress(100);
