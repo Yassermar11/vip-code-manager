@@ -12,8 +12,8 @@ export function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('import');
   const [codes, setCodes] = useState<CodeItem[]>([]);
   const [settings, setSettings] = useState<AppSettings>({
-    theme: 'dark',
-    language: 'en',
+    theme: 'light',
+    language: 'fr',
     signature: 'Yasser Marzouhi (yasser.marzouhi@outlook.com)',
   });
 
