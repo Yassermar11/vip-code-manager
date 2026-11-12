@@ -18,7 +18,6 @@ export const ImportView: React.FC<ImportViewProps> = ({
   const [manualText, setManualText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
 
   const handleGenerate = async (parsedCodes: string[]) => {
     if (parsedCodes.length === 0) {
@@ -32,11 +31,7 @@ export const ImportView: React.FC<ImportViewProps> = ({
     }));
 
     onCodesGenerated(items);
-    setSuccessMessage(`Successfully generated ${items.length} codes!`);
-    setErrorMessage('');
-    setTimeout(() => {
-      setActiveTab('viewer');
-    }, 800);
+    setActiveTab('viewer');
   };
 
   const handleManualSubmit = (e: React.FormEvent) => {
@@ -109,12 +104,6 @@ export const ImportView: React.FC<ImportViewProps> = ({
           <div className="flex items-center space-x-2 text-red-500 text-sm mt-4 p-3 bg-red-50 dark:bg-red-950/30 rounded-xl border border-red-200 dark:border-red-900/50">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             <span>{errorMessage}</span>
-          </div>
-        )}
-        {successMessage && (
-          <div className="flex items-center space-x-2 text-green-600 dark:text-green-400 text-sm mt-4 p-3 bg-green-50 dark:bg-green-950/30 rounded-xl border border-green-200 dark:border-green-900/50">
-            <Check className="w-4 h-4 flex-shrink-0" />
-            <span>{successMessage}</span>
           </div>
         )}
       </div>
